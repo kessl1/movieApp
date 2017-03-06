@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JSPPage</title>
     </head>
     
     <% String table = (String) request.getAttribute("table"); %>
     
     <body>
-        <h1>Jake's Movies</h1
+        <h1>Jake's Movies</h1>
         <%= table %>
     </body>
 </html>

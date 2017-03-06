@@ -104,8 +104,7 @@ public class ReadQuery {
                 table += "<td>";
                 table+=movie.getLead();
                 table += "</td>";
-                
-                table += "</td>";
+                table += "</tr>";
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
