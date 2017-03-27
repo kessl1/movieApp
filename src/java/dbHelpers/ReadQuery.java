@@ -68,9 +68,18 @@ public class ReadQuery {
     
     public String getHTMLtable(){
         String table = "";
-        table += "<table border=1>";
+        table += "<table>";
         
         try {
+                table += "<tr>";
+                table += "<th>MovieID</th>";
+                table += "<th>Title</th>";
+                table += "<th>Studio</th>";
+                table += "<th>Year</th>";
+                table += "<th>Genre</th>";
+                table += "<th>Lead</th>";
+                table += "</tr>";
+                
             while(this.results.next()){
                 Movies movie = new Movies();
                 movie.setMovieID(this.results.getInt("movieID"));
@@ -104,6 +113,10 @@ public class ReadQuery {
                 table += "<td>";
                 table+=movie.getLead();
                 table += "</td>";
+                
+                table += "<td>";
+                table+= "<a href=delete?movieID="+ movie.getMovieID()+ "> Delete </a>";
+                
                 table += "</tr>";
             }
         } catch (SQLException ex) {
