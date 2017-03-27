@@ -78,6 +78,7 @@ public class ReadQuery {
                 table += "<th>Year</th>";
                 table += "<th>Genre</th>";
                 table += "<th>Lead</th>";
+                table += "<th>Edit</th>";
                 table += "</tr>";
                 
             while(this.results.next()){
