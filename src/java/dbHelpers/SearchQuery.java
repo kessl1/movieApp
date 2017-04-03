@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dbHelpers;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -21,22 +15,23 @@ import model.Movies;
  *
  * @author Jake
  */
-public class ReadQuery {
-    private Connection conn;
-    private ResultSet results;
-    
-    public ReadQuery(){
-        Properties props = new Properties();
+public class SearchQuery {
+   private Connection conn;
+   
+   private ResultSet results;
+   
+   public SearchQuery(){
+       Properties props = new Properties();
         InputStream instr = getClass().getResourceAsStream("dbConn.properties");
         try {
             props.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String driver = props.getProperty("driver.name");
@@ -46,27 +41,30 @@ public class ReadQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-    public void doRead(){
-        try {
-            String query = "Select * from MOVIES ORDER BY movieID ASC";
-            
-            PreparedStatement ps = conn.prepareStatement(query);
-            this.results = ps.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public String getHTMLtable(){
+   
+   public void doSearch(String title){
+       try {
+           String query = "SELECT * FROM movies WHERE UPPER(title) LIKE ? ORDER BY movieID ASC";
+           
+           PreparedStatement ps = conn.prepareStatement(query);
+           ps.setString(1, "%" + title.toUpperCase() + "%");
+           this.results = ps.executeQuery();
+       } catch (SQLException ex) {
+           Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+   }
+
+public String getHTMLtable(){
         String table = "";
         table += "<table>";
         
@@ -80,7 +78,12 @@ public class ReadQuery {
                 table += "<th>Lead</th>";
                 table += "<th>Edit</th>";
                 table += "</tr>";
-                
+            if(!this.results.isBeforeFirst()){
+                table+="<tr>";
+                table+="<td colspan='6'>Sorry, this movie does not exist in the database</td>";
+                table+="</tr>";
+            }
+            else{
             while(this.results.next()){
                 Movies movie = new Movies();
                 movie.setMovieID(this.results.getInt("movieID"));
@@ -121,13 +124,14 @@ public class ReadQuery {
                 
                 table += "</tr>";
             }
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         table+= "</table>";
         
         return table;
     }
-    
+   
 }

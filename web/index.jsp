@@ -16,5 +16,7 @@
         <h1>Movies Database</h1>
         <hr>
         <a href="read">View All Movies</a>
+        <br><br>
+        <a href="search.jsp">Search Movies</a>
     </body>
 </html>
