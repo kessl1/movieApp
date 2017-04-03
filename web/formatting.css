@@ -7,4 +7,5 @@ th{text-align:center; vertical-align:middle; background-color:#FFFF99; color:#69
 td{border: 1px solid white; padding:10px;}
 tr:nth-child(even){background-color:#F08D80;}
 tr:hover{background-color:#CCCCCC;}
+input[readonly]{background-color:gray;}
 input{text-align:center;}
