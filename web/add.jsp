@@ -13,6 +13,13 @@
         <link rel="stylesheet" type="text/css" href="formatting.css"/>
     </head>
     <body>
+        <div class="wrap">
+            
+        <%@ include file="includes/header.jsp" %>
+        <%@ include file="includes/menu.jsp" %>
+       
+        <div class="main">
+            
         <h1>Add A New Movie</h1>
         <hr>
         
@@ -48,5 +55,10 @@
             </tbody>
           </table>
         </form>
+        </div>
+        
+        <%@ include file="includes/footer.jsp" %>
+        
+        </div>
     </body>
 </html>

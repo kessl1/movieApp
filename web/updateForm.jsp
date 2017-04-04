@@ -15,9 +15,14 @@
         <link rel="stylesheet" type="text/css" href="formatting.css"/>
     </head>
     <body>
+        <div class="wrap">
+            
+        <%@ include file="includes/header.jsp" %>
+        <%@ include file="includes/menu.jsp" %>
+       
+        <div class="main">
         <h1>Update A Movie Record</h1>
         <hr>
-        
         <form name="updateForm" action="updateMovie" method="get">
           <table class="update">
             <tbody>
@@ -55,5 +60,10 @@
             </tbody>
           </table>
         </form>
+        </div>
+        
+        <%@ include file="includes/footer.jsp" %>
+        
+        </div>
     </body>
 </html>

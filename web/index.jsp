@@ -12,11 +12,19 @@
         <title>Movies</title>
         <link rel="stylesheet" type="text/css" href="formatting.css"/>
     </head>
+    
     <body>
-        <h1>Movies Database</h1>
-        <hr>
-        <a href="read">View All Movies</a>
-        <br><br>
-        <a href="search.jsp">Search Movies</a>
-    </body>
+        <div class="wrap">
+            
+        <%@ include file="includes/header.jsp" %>
+        <%@ include file="includes/menu.jsp" %>
+       
+        <div class="main">
+        <h2>Movies Database</h2>
+        </div>
+        
+        <%@ include file="includes/footer.jsp" %>
+        
+        </div>
+        </body>
 </html>
